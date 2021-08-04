@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="student_list">Lista de Alunos</string>
+    <string name="schedule">Agenda</string>
+    <string name="name">Nome</string>
+    <string name="telephone">Telefone</string>
+    <string name="email">E-mail</string>
+    <string name="save_student">Salvar Aluno</string>
+    <string name="remove">Remover</string>
+    <string name="confirm_removal_message">Confirma a remoção deste aluno?</string>
+    <string name="yes">Sim</string>
+    <string name="no">Não</string>
+    <string name="editing_student">Editando alunos</string>
+</resources>
