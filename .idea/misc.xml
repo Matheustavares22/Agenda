@@ -3,7 +3,11 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Alura/ProjetosAndroid/Agenda/app/src/main/res/drawable-anydpi/ic_action_new_student.xml" value="0.9837962962962963" />
+        <entry key="..\:/Alura/ProjetosAndroid/Agenda/app/src/main/res/drawable-v24/ic_launcher_foreground_old.xml" value="0.9837962962962963" />
         <entry key="..\:/Alura/ProjetosAndroid/Agenda/app/src/main/res/layout/activity_form_student.xml" value="1.5238095238095237" />
+        <entry key="..\:/Alura/ProjetosAndroid/Agenda/app/src/main/res/layout/activity_list_student.xml" value="0.9120370370370371" />
+        <entry key="..\:/Alura/ProjetosAndroid/Agenda/app/src/main/res/menu/activity_student_list_menu.xml" value="0.9120370370370371" />
       </map>
     </option>
   </component>

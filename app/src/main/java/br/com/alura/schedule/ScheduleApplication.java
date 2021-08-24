@@ -14,8 +14,8 @@ public class ScheduleApplication extends Application {
     }
 
     private void createStudentsForTest() {
-        StudentDAO studentDAO = new StudentDAO();
-        studentDAO.save(new Student("Matheus", "14997228948", "matheus@email.com"));
-        studentDAO.save(new Student("Alex", "14997528989", "kamila@email.com"));
+//        StudentDAO studentDAO = new StudentDAO();
+//        studentDAO.save(new Student("Matheus", "14997228948", "matheus@email.com"));
+//        studentDAO.save(new Student("Alex", "14997528989", "kamila@email.com"));
     }
 }
