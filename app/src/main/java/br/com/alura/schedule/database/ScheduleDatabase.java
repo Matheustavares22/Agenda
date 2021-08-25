@@ -6,17 +6,20 @@ import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
-import br.com.alura.schedule.database.dao.RoomStudentDao;
+import br.com.alura.schedule.database.dao.StudentDao;
 import br.com.alura.schedule.model.Student;
 
 @Database(entities = {Student.class}, version = 1,exportSchema = false)
 public abstract class ScheduleDatabase extends RoomDatabase {
 
-    public abstract RoomStudentDao getRoomStudentDao();
+    private static final String DATABASE_NAME = "schedule.db";
 
-    public static RoomStudentDao getInstance(Context context){
+    public abstract StudentDao getRoomStudentDao();
+
+    public static StudentDao getInstance(Context context){
+
         return Room
-                .databaseBuilder(context, ScheduleDatabase.class, "schedule.db")
+                .databaseBuilder(context, ScheduleDatabase.class, DATABASE_NAME)
                 .allowMainThreadQueries()
                 .build()
                 .getRoomStudentDao();

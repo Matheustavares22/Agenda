@@ -11,7 +11,7 @@ import java.util.List;
 import br.com.alura.schedule.model.Student;
 
 @Dao
-public abstract class RoomStudentDao {
+public abstract class StudentDao {
 
     @Insert
     public abstract void save(Student student);

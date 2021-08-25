@@ -8,18 +8,17 @@ import android.widget.EditText;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.room.Room;
 
 import alura.schedule.R;
 import br.com.alura.schedule.database.ScheduleDatabase;
-import br.com.alura.schedule.database.dao.RoomStudentDao;
+import br.com.alura.schedule.database.dao.StudentDao;
 import br.com.alura.schedule.model.Student;
 
 import static br.com.alura.schedule.ui.activity.ConstantActivities.KEY_STUDENT;
 
 public class FormStudentActivity extends AppCompatActivity {
 
-    private RoomStudentDao dao;
+    private StudentDao dao;
     private EditText fieldName;
     private EditText fieldTelephone;
     private EditText fieldEmail;

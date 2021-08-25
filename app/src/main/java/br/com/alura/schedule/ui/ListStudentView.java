@@ -8,18 +8,16 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import androidx.annotation.NonNull;
-import androidx.room.Room;
 
 import alura.schedule.R;
-import br.com.alura.schedule.dao.StudentDAO;
 import br.com.alura.schedule.database.ScheduleDatabase;
-import br.com.alura.schedule.database.dao.RoomStudentDao;
+import br.com.alura.schedule.database.dao.StudentDao;
 import br.com.alura.schedule.model.Student;
 import br.com.alura.schedule.ui.adapter.StudentListAdapter;
 
 public class ListStudentView {
 
-    private final RoomStudentDao dao;
+    private final StudentDao dao;
     private StudentListAdapter adapter;
     private final Context context;
 
