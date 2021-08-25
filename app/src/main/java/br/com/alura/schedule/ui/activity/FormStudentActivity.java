@@ -30,7 +30,7 @@ public class FormStudentActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_form_student);
 
-        dao = Room.databaseBuilder(this, ScheduleDatabase.class, "schedule.db").allowMainThreadQueries().build().getRoomStudentDao();
+        dao = ScheduleDatabase.getInstance(this);
 
         fieldInitialization();
         loadStudent();

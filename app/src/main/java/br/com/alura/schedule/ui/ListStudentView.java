@@ -26,8 +26,8 @@ public class ListStudentView {
     public ListStudentView(Context context) {
         this.context = context;
         this.adapter = new StudentListAdapter(this.context);
-        dao = Room.databaseBuilder(context, ScheduleDatabase.class, "schedule.db").allowMainThreadQueries().build().getRoomStudentDao();
-        //dao = new StudentDAO();
+        dao = ScheduleDatabase.getInstance(context);
+
     }
 
     public void configureAdapter(ListView studentList) {

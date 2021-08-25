@@ -11,5 +11,4 @@
     <string name="no">No</string>
     <string name="editing_student">Editing student</string>
     <string name="key_student" translatable="false">student</string>
-    <string name="database_name">schedule.db</string>
 </resources>
