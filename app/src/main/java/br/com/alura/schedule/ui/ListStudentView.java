@@ -8,22 +8,26 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import androidx.annotation.NonNull;
+import androidx.room.Room;
 
 import alura.schedule.R;
 import br.com.alura.schedule.dao.StudentDAO;
+import br.com.alura.schedule.database.ScheduleDatabase;
+import br.com.alura.schedule.database.dao.RoomStudentDao;
 import br.com.alura.schedule.model.Student;
 import br.com.alura.schedule.ui.adapter.StudentListAdapter;
 
 public class ListStudentView {
 
-    private final StudentDAO studentDAO;
+    private final RoomStudentDao dao;
     private StudentListAdapter adapter;
     private final Context context;
 
     public ListStudentView(Context context) {
         this.context = context;
         this.adapter = new StudentListAdapter(this.context);
-        this.studentDAO  = new StudentDAO();
+        dao = Room.databaseBuilder(context, ScheduleDatabase.class, "schedule.db").allowMainThreadQueries().build().getRoomStudentDao();
+        //dao = new StudentDAO();
     }
 
     public void configureAdapter(ListView studentList) {
@@ -44,11 +48,11 @@ public class ListStudentView {
     }
 
     private void remove(Student student) {
-        studentDAO.remove(student);
+        dao.remove(student);
         adapter.remove(student);
     }
 
     public void updateStudent() {
-        adapter.update(studentDAO.all());
+        adapter.update(dao.all());
     }
 }

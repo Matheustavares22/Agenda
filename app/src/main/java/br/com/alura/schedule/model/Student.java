@@ -3,13 +3,20 @@ package br.com.alura.schedule.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import androidx.room.Entity;
+import androidx.room.Ignore;
+import androidx.room.PrimaryKey;
+
+@Entity()
 public class Student implements Parcelable {
 
+    @PrimaryKey(autoGenerate = true)
     private int id = 0;
     private String name;
     private String telephone;
     private String email;
 
+    @Ignore
     public Student(String name, String telephone, String email) {
         this.name = name;
         this.telephone = telephone;

@@ -4,7 +4,7 @@
     package="alura.schedule">
 
     <application
-        android:name="br.com.alura.schedule.ScheduleApplication"
+
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/schedule"

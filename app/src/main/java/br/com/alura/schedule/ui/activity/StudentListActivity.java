@@ -24,13 +24,14 @@ import static br.com.alura.schedule.ui.activity.ConstantActivities.KEY_STUDENT;
 
 public class StudentListActivity extends AppCompatActivity {
 
-    private final ListStudentView listStudentView = new ListStudentView(this);
+    private ListStudentView listStudentView;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_student);
         Objects.requireNonNull(getSupportActionBar()).setTitle(R.string.student_list);
+        listStudentView = new ListStudentView(this);
         configureFABStudent();
         configureList();
     }

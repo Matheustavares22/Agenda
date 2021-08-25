@@ -8,16 +8,18 @@ import android.widget.EditText;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.room.Room;
 
 import alura.schedule.R;
-import br.com.alura.schedule.dao.StudentDAO;
+import br.com.alura.schedule.database.ScheduleDatabase;
+import br.com.alura.schedule.database.dao.RoomStudentDao;
 import br.com.alura.schedule.model.Student;
 
 import static br.com.alura.schedule.ui.activity.ConstantActivities.KEY_STUDENT;
 
 public class FormStudentActivity extends AppCompatActivity {
 
-    private final StudentDAO studentDAO = new StudentDAO();
+    private RoomStudentDao dao;
     private EditText fieldName;
     private EditText fieldTelephone;
     private EditText fieldEmail;
@@ -27,6 +29,9 @@ public class FormStudentActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_form_student);
+
+        dao = Room.databaseBuilder(this, ScheduleDatabase.class, "schedule.db").allowMainThreadQueries().build().getRoomStudentDao();
+
         fieldInitialization();
         loadStudent();
     }
@@ -67,9 +72,9 @@ public class FormStudentActivity extends AppCompatActivity {
     private void finishForm() {
         fillStudent();
         if(student.hasValidId()){
-            studentDAO.edit(student);
+            dao.edit(student);
         } else{
-            studentDAO.save(student);
+            dao.save(student);
         }
         finish();
     }
