@@ -18,15 +18,15 @@
             android:inputType="textCapWords"
             android:maxLength="50" />
 
-        <EditText
-            android:id="@+id/activity_form_student_surname"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:hint="Surname"
-            android:importantForAutofill="no"
-            android:inputType="textCapWords"
-            android:maxLength="50" />
+<!--        <EditText-->
+<!--            android:id="@+id/activity_form_student_surname"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_margin="8dp"-->
+<!--            android:hint="Surname"-->
+<!--            android:importantForAutofill="no"-->
+<!--            android:inputType="textCapWords"-->
+<!--            android:maxLength="50" />-->
 
         <EditText
             android:id="@+id/activity_form_student_telephone"
