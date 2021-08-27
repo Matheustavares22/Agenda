@@ -14,9 +14,19 @@
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
             android:hint="@string/name"
+            android:importantForAutofill="no"
             android:inputType="textCapWords"
-            android:maxLength="50"
-            android:importantForAutofill="no" />
+            android:maxLength="50" />
+
+        <EditText
+            android:id="@+id/activity_form_student_surname"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:hint="Surname"
+            android:importantForAutofill="no"
+            android:inputType="textCapWords"
+            android:maxLength="50" />
 
         <EditText
             android:id="@+id/activity_form_student_telephone"
@@ -25,9 +35,9 @@
             android:layout_margin="8dp"
             android:digits="()-.+0123456789"
             android:hint="@string/telephone"
+            android:importantForAutofill="no"
             android:inputType="phone"
-            android:maxLength="14"
-            android:importantForAutofill="no" />
+            android:maxLength="14" />
 
         <EditText
             android:id="@+id/activity_form_student_email"
@@ -35,8 +45,8 @@
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
             android:hint="@string/email"
+            android:importantForAutofill="no"
             android:inputType="textEmailAddress"
-            android:maxLength="50"
-            android:importantForAutofill="no" />
+            android:maxLength="50" />
     </LinearLayout>
 </ScrollView>

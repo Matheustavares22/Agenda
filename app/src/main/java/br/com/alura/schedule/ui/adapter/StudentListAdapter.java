@@ -67,7 +67,7 @@ public class StudentListAdapter extends BaseAdapter {
     private void linkInformation(View view, Student student) {
         TextView name = view.findViewById(R.id.item_student_name);
         TextView telephone = view.findViewById(R.id.item_student_telephone);
-        name.setText(student.getName());
+        name.setText(student.getFullName());
         telephone.setText(student.getTelephone());
     }
 

@@ -50,7 +50,7 @@ public class ListStudentView {
         adapter.remove(student);
     }
 
-    public void updateStudent() {
+    public void loadStudentList() {
         adapter.update(dao.all());
     }
 }
