@@ -53,7 +53,7 @@ public class StudentListAdapter extends BaseAdapter {
         createView(viewGroup);
         View view;
 
-        if(convertView == null){
+        if (convertView == null) {
             view = LayoutInflater.from(context).inflate(R.layout.item_student, viewGroup, false);
         } else {
             view = convertView;
@@ -67,7 +67,7 @@ public class StudentListAdapter extends BaseAdapter {
     private void linkInformation(View view, Student student) {
         TextView name = view.findViewById(R.id.item_student_name);
         TextView telephone = view.findViewById(R.id.item_student_telephone);
-        name.setText(student.getFullName());
+        name.setText(student.getName());
         telephone.setText(student.getTelephone());
     }
 

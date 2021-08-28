@@ -19,7 +19,6 @@ import br.com.alura.schedule.model.Student;
 public class FormStudentActivity extends AppCompatActivity {
 
     private EditText fieldName;
-    //private EditText fieldSurname;
     private EditText fieldTelephone;
     private EditText fieldEmail;
     private StudentDao dao;
@@ -65,7 +64,6 @@ public class FormStudentActivity extends AppCompatActivity {
 
     private void fillFields() {
         fieldName.setText(student.getName());
-        //fieldSurname.setText(student.getSurname());
         fieldTelephone.setText(student.getTelephone());
         fieldEmail.setText(student.getEmail());
     }
@@ -82,19 +80,16 @@ public class FormStudentActivity extends AppCompatActivity {
 
     private void fieldInitialization() {
         fieldName = findViewById(R.id.activity_form_student_name);
-        //fieldSurname = findViewById(R.id.activity_form_student_surname);
         fieldTelephone = findViewById(R.id.activity_form_student_telephone);
         fieldEmail = findViewById(R.id.activity_form_student_email);
     }
 
     private void fillStudent() {
         String name = fieldName.getText().toString();
-        //String surname = fieldSurname.getText().toString();
         String telephone = fieldTelephone.getText().toString();
         String email = fieldEmail.getText().toString();
 
         student.setName(name);
-        //student.setSurname(surname);
         student.setTelephone(telephone);
         student.setEmail(email);
     }
