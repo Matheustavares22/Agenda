@@ -19,7 +19,8 @@ import br.com.alura.schedule.model.Student;
 public class FormStudentActivity extends AppCompatActivity {
 
     private EditText fieldName;
-    private EditText fieldTelephone;
+    private EditText fieldCellPhone;
+    private EditText fieldLandline;
     private EditText fieldEmail;
     private StudentDao dao;
     private Student student;
@@ -29,7 +30,7 @@ public class FormStudentActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_form_student);
 
-        dao = ScheduleDatabase.getInstance(this);
+        dao = ScheduleDatabase.getInstance(this).getRoomStudentDao();
 
         fieldInitialization();
         loadStudent();
@@ -64,7 +65,8 @@ public class FormStudentActivity extends AppCompatActivity {
 
     private void fillFields() {
         fieldName.setText(student.getName());
-        fieldTelephone.setText(student.getTelephone());
+//        fieldCellPhone.setText(student.getCellPhone());
+//        fieldLandline.setText(student.getLandline());
         fieldEmail.setText(student.getEmail());
     }
 
@@ -80,17 +82,20 @@ public class FormStudentActivity extends AppCompatActivity {
 
     private void fieldInitialization() {
         fieldName = findViewById(R.id.activity_form_student_name);
-        fieldTelephone = findViewById(R.id.activity_form_student_telephone);
+        fieldCellPhone = findViewById(R.id.activity_form_student_cellphone);
+        fieldLandline = findViewById(R.id.activity_form_student_landline);
         fieldEmail = findViewById(R.id.activity_form_student_email);
     }
 
     private void fillStudent() {
         String name = fieldName.getText().toString();
-        String telephone = fieldTelephone.getText().toString();
+        String cellPhone = fieldCellPhone.getText().toString();
+        String landline = fieldLandline.getText().toString();
         String email = fieldEmail.getText().toString();
 
         student.setName(name);
-        student.setTelephone(telephone);
+//        student.setCellPhone(cellPhone);
+//        student.setLandline(landline);
         student.setEmail(email);
     }
 

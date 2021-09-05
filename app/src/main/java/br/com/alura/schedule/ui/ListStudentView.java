@@ -24,7 +24,7 @@ public class ListStudentView {
     public ListStudentView(Context context) {
         this.context = context;
         this.adapter = new StudentListAdapter(this.context);
-        dao = ScheduleDatabase.getInstance(context);
+        dao = ScheduleDatabase.getInstance(context).getRoomStudentDao();
 
     }
 

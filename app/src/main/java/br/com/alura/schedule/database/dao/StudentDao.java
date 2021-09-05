@@ -1,5 +1,7 @@
 package br.com.alura.schedule.database.dao;
 
+import static br.com.alura.schedule.database.constant.StudentQueries.QUERY_GET_STUDENT_DATA;
+
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
@@ -19,9 +21,10 @@ public abstract class StudentDao {
     @Delete
     public abstract void remove(Student student);
 
-    @Query("SELECT * FROM Student")
+    @Query(QUERY_GET_STUDENT_DATA)
     public abstract List<Student> all();
 
     @Update
     public abstract void edit(Student student);
+
 }

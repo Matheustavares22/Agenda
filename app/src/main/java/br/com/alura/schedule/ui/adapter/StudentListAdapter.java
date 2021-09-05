@@ -11,7 +11,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import alura.schedule.R;
+import br.com.alura.schedule.database.ScheduleDatabase;
+import br.com.alura.schedule.database.dao.TelephoneDAO;
 import br.com.alura.schedule.model.Student;
+import br.com.alura.schedule.model.Telephone;
 
 public class StudentListAdapter extends BaseAdapter {
 
@@ -66,9 +69,12 @@ public class StudentListAdapter extends BaseAdapter {
 
     private void linkInformation(View view, Student student) {
         TextView name = view.findViewById(R.id.item_student_name);
-        TextView telephone = view.findViewById(R.id.item_student_telephone);
         name.setText(student.getName());
-        telephone.setText(student.getTelephone());
+
+        TelephoneDAO telephoneDao = ScheduleDatabase.getInstance(context).getTelephoneDao();
+        Telephone firstTelephone = telephoneDao.findFirstTelephone(student.getId());
+        TextView cellPhone = view.findViewById(R.id.item_student_cellphone);
+        cellPhone.setText(firstTelephone.getNumber());
     }
 
     @SuppressWarnings("UnusedReturnValue")

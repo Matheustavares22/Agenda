@@ -15,7 +15,7 @@
         tools:text="Matheus" />
 
     <TextView
-        android:id="@+id/item_student_telephone"
+        android:id="@+id/item_student_cellphone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"

@@ -4,12 +4,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import androidx.room.Entity;
-import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
-import androidx.room.TypeConverter;
-
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 
 @Entity()
 public class Student implements Parcelable {
@@ -17,7 +12,6 @@ public class Student implements Parcelable {
     @PrimaryKey(autoGenerate = true)
     private int id = 0;
     private String name;
-    private String telephone;
     private String email;
 
     public Student() {
@@ -43,14 +37,6 @@ public class Student implements Parcelable {
         this.name = name;
     }
 
-    public String getTelephone() {
-        return telephone;
-    }
-
-    public void setTelephone(String telephone) {
-        this.telephone = telephone;
-    }
-
     public String getEmail() {
         return email;
     }
@@ -62,7 +48,7 @@ public class Student implements Parcelable {
     @SuppressWarnings("NullableProblems")
     @Override
     public String toString() {
-        return this.name + " - " + telephone;
+        return this.name;
     }
 
     public static final Creator<Student> CREATOR = new Creator<Student>() {
@@ -86,14 +72,13 @@ public class Student implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeInt(id);
         dest.writeString(name);
-        dest.writeString(telephone);
         dest.writeString(email);
     }
 
     protected Student(Parcel in) {
         id = in.readInt();
         name = in.readString();
-        telephone = in.readString();
         email = in.readString();
     }
+
 }

@@ -18,26 +18,27 @@
             android:inputType="textCapWords"
             android:maxLength="50" />
 
-<!--        <EditText-->
-<!--            android:id="@+id/activity_form_student_surname"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_margin="8dp"-->
-<!--            android:hint="Surname"-->
-<!--            android:importantForAutofill="no"-->
-<!--            android:inputType="textCapWords"-->
-<!--            android:maxLength="50" />-->
-
         <EditText
-            android:id="@+id/activity_form_student_telephone"
+            android:id="@+id/activity_form_student_cellphone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
             android:digits="()-.+0123456789"
-            android:hint="@string/telephone"
+            android:hint="@string/cellphone"
             android:importantForAutofill="no"
             android:inputType="phone"
             android:maxLength="14" />
+
+        <EditText
+            android:id="@+id/activity_form_student_landline"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:digits="()-.+0123456789"
+            android:hint="Landline"
+            android:importantForAutofill="no"
+            android:inputType="textCapWords"
+            android:maxLength="50" />
 
         <EditText
             android:id="@+id/activity_form_student_email"

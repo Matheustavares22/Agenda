@@ -3,7 +3,7 @@
     <string name="student_list">Lista de Alunos</string>
     <string name="schedule">Agenda</string>
     <string name="name">Nome</string>
-    <string name="telephone">Telefone</string>
+    <string name="cellphone">Celular</string>
     <string name="email">E-mail</string>
     <string name="save_student">Salvar Aluno</string>
     <string name="remove">Remover</string>
