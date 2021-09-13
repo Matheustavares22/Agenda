@@ -1,6 +1,6 @@
 package br.com.alura.schedule.database.constant;
 
 public interface TelephoneQueries {
-    String QUERY_GET_TELEPHONE_PART_1 = "SELECT tel.* FROM Telephone tel JOIN Student st ON tel.studentId = st.id WHERE tel.studentId =";
-    String QUERY_GET_TELEPHONE_PART_2 = "LIMIT 1";
+    String QUERY_GET_FIRST_TELEPHONE = "SELECT * FROM Telephone WHERE studentId = :studentId LIMIT 1";
+    String QUERY_GET_ALL_TELEPHONE  = "SELECT * FROM Telephone WHERE studentId = :studentId";
 }

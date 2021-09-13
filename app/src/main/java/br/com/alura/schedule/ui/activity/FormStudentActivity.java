@@ -1,5 +1,7 @@
 package br.com.alura.schedule.ui.activity;
 
+import static br.com.alura.schedule.model.TelephoneType.CELLPHONE;
+import static br.com.alura.schedule.model.TelephoneType.LANDLINE;
 import static br.com.alura.schedule.ui.activity.ConstantActivities.KEY_STUDENT;
 
 import android.content.Intent;
@@ -11,10 +13,15 @@ import android.widget.EditText;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.List;
+
 import alura.schedule.R;
 import br.com.alura.schedule.database.ScheduleDatabase;
 import br.com.alura.schedule.database.dao.StudentDao;
+import br.com.alura.schedule.database.dao.TelephoneDAO;
 import br.com.alura.schedule.model.Student;
+import br.com.alura.schedule.model.Telephone;
+import br.com.alura.schedule.model.TelephoneType;
 
 public class FormStudentActivity extends AppCompatActivity {
 
@@ -22,7 +29,8 @@ public class FormStudentActivity extends AppCompatActivity {
     private EditText fieldCellPhone;
     private EditText fieldLandline;
     private EditText fieldEmail;
-    private StudentDao dao;
+    private StudentDao studentDao;
+    private TelephoneDAO telephoneDao;
     private Student student;
 
     @Override
@@ -30,7 +38,9 @@ public class FormStudentActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_form_student);
 
-        dao = ScheduleDatabase.getInstance(this).getRoomStudentDao();
+        //dao initialization
+        studentDao = ScheduleDatabase.getInstance(this).getRoomStudentDao();
+        telephoneDao = ScheduleDatabase.getInstance(this).getTelephoneDao();
 
         fieldInitialization();
         loadStudent();
@@ -65,17 +75,32 @@ public class FormStudentActivity extends AppCompatActivity {
 
     private void fillFields() {
         fieldName.setText(student.getName());
-//        fieldCellPhone.setText(student.getCellPhone());
-//        fieldLandline.setText(student.getLandline());
+        //List<Telephone> telephones = telephoneDao.findAllTelephones(student.getId());
+        List<Telephone> studentTelephones = telephoneDao.findAllTelephones(student.getId());
+        for (Telephone telephone:
+             studentTelephones) {
+            if(telephone.getType() == CELLPHONE){
+                fieldCellPhone.setText(telephone.getNumber());
+            } else {
+                fieldLandline.setText(telephone.getNumber());
+            }
+        }
         fieldEmail.setText(student.getEmail());
     }
 
     private void finishForm() {
         fillStudent();
         if (student.hasValidId()) {
-            dao.edit(student);
+            studentDao.edit(student);
         } else {
-            dao.save(student);
+            int studentId = studentDao.save(student).intValue();
+            String cellphoneNumber = fieldCellPhone.getText().toString();
+            Telephone cellphone = new Telephone(cellphoneNumber, CELLPHONE, studentId);
+
+            String landlineNumber = fieldLandline.getText().toString();
+            Telephone telephone = new Telephone(landlineNumber, LANDLINE, studentId);
+
+            telephoneDao.save(cellphone, telephone);
         }
         finish();
     }

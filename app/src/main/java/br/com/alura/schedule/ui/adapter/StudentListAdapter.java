@@ -20,9 +20,11 @@ public class StudentListAdapter extends BaseAdapter {
 
     private final List<Student> students = new ArrayList<>();
     private final Context context;
+    private final TelephoneDAO dao;
 
     public StudentListAdapter(Context context) {
         this.context = context;
+        dao = ScheduleDatabase.getInstance(context).getTelephoneDao();
     }
 
     public void update(List<Student> students) {
@@ -70,9 +72,7 @@ public class StudentListAdapter extends BaseAdapter {
     private void linkInformation(View view, Student student) {
         TextView name = view.findViewById(R.id.item_student_name);
         name.setText(student.getName());
-
-        TelephoneDAO telephoneDao = ScheduleDatabase.getInstance(context).getTelephoneDao();
-        Telephone firstTelephone = telephoneDao.findFirstTelephone(student.getId());
+        Telephone firstTelephone = dao.findFirstTelephone(student.getId());
         TextView cellPhone = view.findViewById(R.id.item_student_cellphone);
         cellPhone.setText(firstTelephone.getNumber());
     }

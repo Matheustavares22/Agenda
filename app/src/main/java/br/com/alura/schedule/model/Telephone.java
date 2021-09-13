@@ -15,6 +15,13 @@ public class Telephone {
     private int id;
     private String number;
     private TelephoneType type;
+    private int studentId;
+
+    public Telephone(String number, TelephoneType type, int studentId) {
+        this.number = number;
+        this.type = type;
+        this.studentId = studentId;
+    }
 
     public int getStudentId() {
         return studentId;
@@ -23,8 +30,6 @@ public class Telephone {
     public void setStudentId(int studentId) {
         this.studentId = studentId;
     }
-
-    private int studentId;
 
     public int getId() {
         return id;

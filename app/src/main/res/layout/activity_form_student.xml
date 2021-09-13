@@ -37,7 +37,7 @@
             android:digits="()-.+0123456789"
             android:hint="Landline"
             android:importantForAutofill="no"
-            android:inputType="textCapWords"
+            android:inputType="phone"
             android:maxLength="50" />
 
         <EditText

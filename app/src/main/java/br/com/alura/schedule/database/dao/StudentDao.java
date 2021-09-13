@@ -13,18 +13,18 @@ import java.util.List;
 import br.com.alura.schedule.model.Student;
 
 @Dao
-public abstract class StudentDao {
+public interface StudentDao {
 
     @Insert
-    public abstract void save(Student student);
+    Long save(Student student);
 
     @Delete
-    public abstract void remove(Student student);
+    void remove(Student student);
 
     @Query(QUERY_GET_STUDENT_DATA)
-    public abstract List<Student> all();
+    List<Student> all();
 
     @Update
-    public abstract void edit(Student student);
+    void edit(Student student);
 
 }
