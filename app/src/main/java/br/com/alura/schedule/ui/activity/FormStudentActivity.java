@@ -21,7 +21,6 @@ import br.com.alura.schedule.database.dao.StudentDao;
 import br.com.alura.schedule.database.dao.TelephoneDAO;
 import br.com.alura.schedule.model.Student;
 import br.com.alura.schedule.model.Telephone;
-import br.com.alura.schedule.model.TelephoneType;
 
 public class FormStudentActivity extends AppCompatActivity {
 
@@ -32,6 +31,7 @@ public class FormStudentActivity extends AppCompatActivity {
     private StudentDao studentDao;
     private TelephoneDAO telephoneDao;
     private Student student;
+    private List<Telephone> studentTelephones;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,10 +76,10 @@ public class FormStudentActivity extends AppCompatActivity {
     private void fillFields() {
         fieldName.setText(student.getName());
         //List<Telephone> telephones = telephoneDao.findAllTelephones(student.getId());
-        List<Telephone> studentTelephones = telephoneDao.findAllTelephones(student.getId());
-        for (Telephone telephone:
-             studentTelephones) {
-            if(telephone.getType() == CELLPHONE){
+        studentTelephones = telephoneDao.findAllTelephones(student.getId());
+        for (Telephone telephone :
+                studentTelephones) {
+            if (telephone.getType() == CELLPHONE) {
                 fieldCellPhone.setText(telephone.getNumber());
             } else {
                 fieldLandline.setText(telephone.getNumber());
@@ -92,13 +92,30 @@ public class FormStudentActivity extends AppCompatActivity {
         fillStudent();
         if (student.hasValidId()) {
             studentDao.edit(student);
-        } else {
-            int studentId = studentDao.save(student).intValue();
+
             String cellphoneNumber = fieldCellPhone.getText().toString();
-            Telephone cellphone = new Telephone(cellphoneNumber, CELLPHONE, studentId);
+            Telephone cellphone = new Telephone(cellphoneNumber, CELLPHONE, student.getId());
 
             String landlineNumber = fieldLandline.getText().toString();
-            Telephone telephone = new Telephone(landlineNumber, LANDLINE, studentId);
+            Telephone landline = new Telephone(landlineNumber, LANDLINE, student.getId());
+
+            for (Telephone telephone :
+                    studentTelephones) {
+                if (telephone.getType() == CELLPHONE) {
+                    cellphone.setId(telephone.getId());
+                } else {
+                    landline.setId(telephone.getId());
+                }
+            }
+
+            telephoneDao.update(cellphone, landline);
+        } else {
+            //int studentId = studentDao.save(student).intValue();
+            String cellphoneNumber = fieldCellPhone.getText().toString();
+            Telephone cellphone = new Telephone(cellphoneNumber, CELLPHONE, student.getId());
+
+            String landlineNumber = fieldLandline.getText().toString();
+            Telephone telephone = new Telephone(landlineNumber, LANDLINE, student.getId());
 
             telephoneDao.save(cellphone, telephone);
         }

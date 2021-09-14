@@ -5,7 +5,9 @@ import static br.com.alura.schedule.database.constant.TelephoneQueries.QUERY_GET
 
 import androidx.room.Dao;
 import androidx.room.Insert;
+import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
+import androidx.room.Update;
 
 import java.util.List;
 
@@ -22,4 +24,7 @@ public interface TelephoneDAO {
 
     @Query(QUERY_GET_ALL_TELEPHONE)
     List<Telephone> findAllTelephones(int studentId);
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    void update(Telephone... telephones);
 }
