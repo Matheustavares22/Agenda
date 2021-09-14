@@ -17,10 +17,9 @@ public class Telephone {
     private TelephoneType type;
     private int studentId;
 
-    public Telephone(String number, TelephoneType type, int studentId) {
+    public Telephone(String number, TelephoneType type) {
         this.number = number;
         this.type = type;
-        this.studentId = studentId;
     }
 
     public int getStudentId() {

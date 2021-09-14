@@ -21,6 +21,7 @@ import br.com.alura.schedule.database.dao.StudentDao;
 import br.com.alura.schedule.database.dao.TelephoneDAO;
 import br.com.alura.schedule.model.Student;
 import br.com.alura.schedule.model.Telephone;
+import br.com.alura.schedule.model.TelephoneType;
 
 public class FormStudentActivity extends AppCompatActivity {
 
@@ -38,7 +39,6 @@ public class FormStudentActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_form_student);
 
-        //dao initialization
         studentDao = ScheduleDatabase.getInstance(this).getRoomStudentDao();
         telephoneDao = ScheduleDatabase.getInstance(this).getTelephoneDao();
 
@@ -65,7 +65,7 @@ public class FormStudentActivity extends AppCompatActivity {
         Intent data = getIntent();
         if (data.hasExtra(KEY_STUDENT)) {
             setTitle(R.string.editing_student);
-            student = (Student) data.getExtras().getParcelable(KEY_STUDENT);
+            student = data.getExtras().getParcelable(KEY_STUDENT);
             fillFields();
         } else {
             setTitle(R.string.student_list);
@@ -75,7 +75,11 @@ public class FormStudentActivity extends AppCompatActivity {
 
     private void fillFields() {
         fieldName.setText(student.getName());
-        //List<Telephone> telephones = telephoneDao.findAllTelephones(student.getId());
+        fieldEmail.setText(student.getEmail());
+        fillTelephones();
+    }
+
+    private void fillTelephones() {
         studentTelephones = telephoneDao.findAllTelephones(student.getId());
         for (Telephone telephone :
                 studentTelephones) {
@@ -85,41 +89,56 @@ public class FormStudentActivity extends AppCompatActivity {
                 fieldLandline.setText(telephone.getNumber());
             }
         }
-        fieldEmail.setText(student.getEmail());
     }
 
     private void finishForm() {
         fillStudent();
+
+        Telephone cellphone = createTelephone(fieldCellPhone, CELLPHONE);
+        Telephone landline = createTelephone(fieldLandline, LANDLINE);
+
         if (student.hasValidId()) {
-            studentDao.edit(student);
-
-            String cellphoneNumber = fieldCellPhone.getText().toString();
-            Telephone cellphone = new Telephone(cellphoneNumber, CELLPHONE, student.getId());
-
-            String landlineNumber = fieldLandline.getText().toString();
-            Telephone landline = new Telephone(landlineNumber, LANDLINE, student.getId());
-
-            for (Telephone telephone :
-                    studentTelephones) {
-                if (telephone.getType() == CELLPHONE) {
-                    cellphone.setId(telephone.getId());
-                } else {
-                    landline.setId(telephone.getId());
-                }
-            }
-
-            telephoneDao.update(cellphone, landline);
+            editStudent(cellphone, landline);
         } else {
-            //int studentId = studentDao.save(student).intValue();
-            String cellphoneNumber = fieldCellPhone.getText().toString();
-            Telephone cellphone = new Telephone(cellphoneNumber, CELLPHONE, student.getId());
-
-            String landlineNumber = fieldLandline.getText().toString();
-            Telephone telephone = new Telephone(landlineNumber, LANDLINE, student.getId());
-
-            telephoneDao.save(cellphone, telephone);
+            saveStudent(cellphone, landline);
         }
         finish();
+    }
+
+    private Telephone createTelephone(EditText fieldCellPhone, TelephoneType cellphone2) {
+        String cellphoneNumber = fieldCellPhone.getText().toString();
+        return new Telephone(cellphoneNumber, cellphone2);
+    }
+
+    private void saveStudent(Telephone cellphone, Telephone landline) {
+        int studentId = studentDao.save(student).intValue();
+        bindStudentTelephones( studentId, cellphone, landline);
+        telephoneDao.save(cellphone, landline);
+    }
+
+    private void editStudent(Telephone cellphone, Telephone landline) {
+        studentDao.edit(student);
+        bindStudentTelephones(student.getId(), cellphone, landline);
+        updateTelephonesId(cellphone, landline);
+        telephoneDao.update(cellphone, landline);
+    }
+
+    private void updateTelephonesId(Telephone cellphone, Telephone landline) {
+        for (Telephone telephone :
+                studentTelephones) {
+            if (telephone.getType() == CELLPHONE) {
+                cellphone.setId(telephone.getId());
+            } else {
+                landline.setId(telephone.getId());
+            }
+        }
+    }
+
+    private void bindStudentTelephones(int studentId, Telephone... telephones) {
+        for (Telephone telephone :
+                telephones) {
+            telephone.setStudentId(studentId);
+        }
     }
 
     private void fieldInitialization() {
