@@ -11,7 +11,7 @@ import androidx.annotation.NonNull;
 
 import alura.schedule.R;
 import br.com.alura.schedule.asynctask.FindStudentsTask;
-import br.com.alura.schedule.asynctask.removeStudentTask;
+import br.com.alura.schedule.asynctask.RemoveStudentTask;
 import br.com.alura.schedule.database.ScheduleDatabase;
 import br.com.alura.schedule.database.dao.StudentDao;
 import br.com.alura.schedule.model.Student;
@@ -48,7 +48,7 @@ public class ListStudentView {
     }
 
     private void remove(Student student) {
-        new removeStudentTask(dao, adapter, student).execute();
+        new RemoveStudentTask(dao, adapter, student).execute();
     }
 
     public void updateStudentList() {

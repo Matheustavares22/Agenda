@@ -13,12 +13,10 @@ import android.widget.EditText;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import java.util.List;
-
 import alura.schedule.R;
 import br.com.alura.schedule.asynctask.FindAllTelephonesTask;
 import br.com.alura.schedule.asynctask.SaveStudentTask;
-import br.com.alura.schedule.asynctask.editStudentTask;
+import br.com.alura.schedule.asynctask.EditStudentTask;
 import br.com.alura.schedule.database.ScheduleDatabase;
 import br.com.alura.schedule.database.dao.StudentDao;
 import br.com.alura.schedule.database.dao.TelephoneDAO;
@@ -115,7 +113,7 @@ public class FormStudentActivity extends AppCompatActivity {
     }
 
     private void editStudent(Telephone cellphone, Telephone landline) {
-        new editStudentTask(studentDao, telephoneDao, student, cellphone, landline, this::finish).execute();
+        new EditStudentTask(studentDao, telephoneDao, student, cellphone, landline, this::finish).execute();
     }
 
     private void fieldInitialization() {
@@ -127,13 +125,9 @@ public class FormStudentActivity extends AppCompatActivity {
 
     private void fillStudent() {
         String name = fieldName.getText().toString();
-        String cellPhone = fieldCellPhone.getText().toString();
-        String landline = fieldLandline.getText().toString();
         String email = fieldEmail.getText().toString();
 
         student.setName(name);
-//        student.setCellPhone(cellPhone);
-//        student.setLandline(landline);
         student.setEmail(email);
     }
 

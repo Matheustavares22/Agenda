@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import alura.schedule.R;
-import br.com.alura.schedule.asynctask.findFirstTelephoneTask;
+import br.com.alura.schedule.asynctask.FindFirstTelephoneTask;
 import br.com.alura.schedule.database.ScheduleDatabase;
 import br.com.alura.schedule.database.dao.TelephoneDAO;
 import br.com.alura.schedule.model.Student;
@@ -73,7 +73,7 @@ public class StudentListAdapter extends BaseAdapter {
         TextView name = view.findViewById(R.id.item_student_name);
         name.setText(student.getName());
         TextView cellPhone = view.findViewById(R.id.item_student_cellphone);
-        new findFirstTelephoneTask(dao, student.getId(), telephoneFound -> cellPhone.setText(telephoneFound.getNumber())).execute();
+        new FindFirstTelephoneTask(dao, student.getId(), telephoneFound -> cellPhone.setText(telephoneFound.getNumber())).execute();
     }
 
     @SuppressWarnings("UnusedReturnValue")
