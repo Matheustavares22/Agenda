@@ -16,6 +16,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import java.util.List;
 
 import alura.schedule.R;
+import br.com.alura.schedule.asynctask.FindAllTelephonesTask;
+import br.com.alura.schedule.asynctask.SaveStudentTask;
+import br.com.alura.schedule.asynctask.editStudentTask;
 import br.com.alura.schedule.database.ScheduleDatabase;
 import br.com.alura.schedule.database.dao.StudentDao;
 import br.com.alura.schedule.database.dao.TelephoneDAO;
@@ -32,7 +35,6 @@ public class FormStudentActivity extends AppCompatActivity {
     private StudentDao studentDao;
     private TelephoneDAO telephoneDao;
     private Student student;
-    private List<Telephone> studentTelephones;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,29 +82,27 @@ public class FormStudentActivity extends AppCompatActivity {
     }
 
     private void fillTelephones() {
-        studentTelephones = telephoneDao.findAllTelephones(student.getId());
-        for (Telephone telephone :
-                studentTelephones) {
-            if (telephone.getType() == CELLPHONE) {
-                fieldCellPhone.setText(telephone.getNumber());
-            } else {
-                fieldLandline.setText(telephone.getNumber());
+        new FindAllTelephonesTask(telephoneDao, student, telephones -> {
+            for (Telephone telephone :
+                    telephones) {
+                if (telephone.getType() == CELLPHONE) {
+                    fieldCellPhone.setText(telephone.getNumber());
+                } else {
+                    fieldLandline.setText(telephone.getNumber());
+                }
             }
-        }
+        }).execute();
     }
 
     private void finishForm() {
         fillStudent();
-
         Telephone cellphone = createTelephone(fieldCellPhone, CELLPHONE);
         Telephone landline = createTelephone(fieldLandline, LANDLINE);
-
         if (student.hasValidId()) {
             editStudent(cellphone, landline);
         } else {
             saveStudent(cellphone, landline);
         }
-        finish();
     }
 
     private Telephone createTelephone(EditText fieldCellPhone, TelephoneType cellphone2) {
@@ -111,34 +111,11 @@ public class FormStudentActivity extends AppCompatActivity {
     }
 
     private void saveStudent(Telephone cellphone, Telephone landline) {
-        int studentId = studentDao.save(student).intValue();
-        bindStudentTelephones( studentId, cellphone, landline);
-        telephoneDao.save(cellphone, landline);
+        new SaveStudentTask(studentDao, telephoneDao, student, cellphone, landline, this::finish).execute();
     }
 
     private void editStudent(Telephone cellphone, Telephone landline) {
-        studentDao.edit(student);
-        bindStudentTelephones(student.getId(), cellphone, landline);
-        updateTelephonesId(cellphone, landline);
-        telephoneDao.update(cellphone, landline);
-    }
-
-    private void updateTelephonesId(Telephone cellphone, Telephone landline) {
-        for (Telephone telephone :
-                studentTelephones) {
-            if (telephone.getType() == CELLPHONE) {
-                cellphone.setId(telephone.getId());
-            } else {
-                landline.setId(telephone.getId());
-            }
-        }
-    }
-
-    private void bindStudentTelephones(int studentId, Telephone... telephones) {
-        for (Telephone telephone :
-                telephones) {
-            telephone.setStudentId(studentId);
-        }
+        new editStudentTask(studentDao, telephoneDao, student, cellphone, landline, this::finish).execute();
     }
 
     private void fieldInitialization() {
