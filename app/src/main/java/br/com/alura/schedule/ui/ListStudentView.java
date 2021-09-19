@@ -10,6 +10,8 @@ import android.widget.ListView;
 import androidx.annotation.NonNull;
 
 import alura.schedule.R;
+import br.com.alura.schedule.asynctask.FindStudentsTask;
+import br.com.alura.schedule.asynctask.removeStudentTask;
 import br.com.alura.schedule.database.ScheduleDatabase;
 import br.com.alura.schedule.database.dao.StudentDao;
 import br.com.alura.schedule.model.Student;
@@ -17,9 +19,9 @@ import br.com.alura.schedule.ui.adapter.StudentListAdapter;
 
 public class ListStudentView {
 
+    private final Context context;
     private final StudentDao dao;
     private StudentListAdapter adapter;
-    private final Context context;
 
     public ListStudentView(Context context) {
         this.context = context;
@@ -46,11 +48,10 @@ public class ListStudentView {
     }
 
     private void remove(Student student) {
-        dao.remove(student);
-        adapter.remove(student);
+        new removeStudentTask(dao, adapter, student).execute();
     }
 
-    public void loadStudentList() {
-        adapter.update(dao.all());
+    public void updateStudentList() {
+        new FindStudentsTask(dao, adapter).execute();
     }
 }

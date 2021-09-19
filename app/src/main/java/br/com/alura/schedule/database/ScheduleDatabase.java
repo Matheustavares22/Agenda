@@ -29,7 +29,6 @@ public abstract class ScheduleDatabase extends RoomDatabase {
 
         return Room
                 .databaseBuilder(context, ScheduleDatabase.class, SCHEDULE_DB)
-                .allowMainThreadQueries()
                 .addMigrations(MIGRATIONS)
                 .build();
     }

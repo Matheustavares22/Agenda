@@ -54,7 +54,7 @@ public class StudentListActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        listStudentView.loadStudentList();
+        listStudentView.updateStudentList();
     }
 
     private void configureList() {
